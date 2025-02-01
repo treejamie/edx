@@ -1,3 +1,5 @@
+import sys
+
 """
 Assume s is a string of lower case characters.
 
@@ -18,44 +20,64 @@ We encourage you to work smart.
 	- If you have time, come back to this problem after you've had a break and cleared your head.
 
 """
-s = 'azcbobobegghakl'
 
-# define a longest seen
-longest = ''
+def solution(s):
 
-# define a maybe longest
-maybe_longest = ''
+	answers = [] # the stash for the answers
+	wip = ''     # work in progress
 
-# stick to while and for loops as that is what we've has been using so far
-for i in range(len(s)):
+	for i, char in enumerate(s):
 
-	if len(maybe_longest) > len(longest):
-		longest = maybe_longest
-
-	maybe_longest = ''
-	outer = s[i]
-	foo = s[i::]
-
-	for j in range(len(foo)):
-		# if this is zero loop, special case
-		if j == 0:
-			prv = outer
-			maybe_longest = prv
+		# next_char: 
+		# I could have caught the exception
+		# but the class has not covered that yet
+		if len(s) -1 != i:          # this is fugly
+			next_char = s[ i + 1 ]  # and so is this
 		else:
-			prv = foo[j]
+			next_char = ''
 
-		# define next, catch index error
-		try:
-			nxt = foo[j + 1]
-		except IndexError:
-			pass
+		# we are always adding to the WIP in all cases
+		wip += char
 
-		# if current less than next, we are alphabetic
-		if prv <= nxt:
-			# add to maybe longest
-			maybe_longest += nxt
-		else:
-			# reset and move on
-			break
+		# if char is greater than append to answers, and reset wip
+		if char > next_char:
+			answers.append(wip)
+			wip = ''
 
-print("Longest substring in alphabetical order is: {0}".format(longest))
+
+	# what is the longest thing in the answers?
+	longest = max([len(x) for x in answers])
+
+	# return the first largest thing
+	answer = [x for x in answers if len(x) >= longest][0]
+	return answer
+
+
+
+tests ={
+	'azcbobobegghakl': 'beggh',
+	'rikcgzkbes': 'cgz',
+	'psygsuarkxvoedyuymv': 'psy',
+	'abcdefghijklmnopqrstuvwxyz': 'abcdefghijklmnopqrstuvwxyz',
+	'bhogrgkjbd': 'bho',
+	'paflivqzpjtfkebavrnhibje': 'afl'
+}
+
+for string, expected in tests.items():
+	result = solution(string)
+        # assert
+	try:
+		assert result == expected
+		print("✅: success {0} - {1} expected and {2} received".format(
+			string,
+			expected,
+			result
+		))
+	except AssertionError:
+		msg = "❌: error in {0}:\n\texpected: {1}\n\treceived: {2} ".format(
+			string,
+			expected,
+			result
+		)
+		sys.exit(msg)	
+
