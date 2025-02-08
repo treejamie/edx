@@ -15,6 +15,6 @@ jobs:
     - name: Unit 1 tests
       run: |
         python MITx6.00.1x/unit1-python-basics/problem_3.py 
-        - name: Unit 2 tests
-        run: |
-          python MITx6.00.1x/unit2-simple-programs/isin.py 
+    - name: Unit 2 tests
+      run: |
+        python MITx6.00.1x/unit2-simple-programs/isin.py 
