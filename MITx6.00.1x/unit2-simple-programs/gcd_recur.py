@@ -11,7 +11,21 @@ import sys
 
 
 def gcdRecur(a, b):
-    pass
+    """
+    g   = gcdRecur(a, b) 
+        = gcdRecur(b, r0)
+        = gcdRecur(r0, r1)
+        = ... 
+        = gcdRecur(rN−2, rN−1) = rN−1.
+    """
+    # the base case
+    if b == 0:
+        return a
+    
+    return gcdRecur(b, a % b)
+
+    
+
 
 
 
