@@ -17,6 +17,8 @@ paid_off = False
 maybe_payment = 10
 _balance = balance
 
+iterations = 0
+
 
 # now just simulate months
 while not paid_off:
@@ -29,6 +31,9 @@ while not paid_off:
 
         # Updated balance each month = (Monthly unpaid balance) + (Monthly interest rate x Monthly unpaid balance)
         _balance = unpaid_balance + (mir * unpaid_balance)
+
+        # update the iterations
+        iterations += 1
     
     # if balance greater than 0 we are not paid off.
     if _balance > 1:
@@ -41,3 +46,4 @@ while not paid_off:
         paid_off = True
 
 print("Lowest Payment:", maybe_payment)
+print("Iterations:", iterations)
