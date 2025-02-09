@@ -21,3 +21,6 @@ jobs:
         python MITx6.00.1x/unit2-simple-programs/problem_1.py 
         python MITx6.00.1x/unit2-simple-programs/problem_2.py 
         python MITx6.00.1x/unit2-simple-programs/problem_3.py 
+    - name: Unit 3 tests
+      run: |
+        python MITx6.00.1x/unit3-structured-types/_1_odd_tuples.py
