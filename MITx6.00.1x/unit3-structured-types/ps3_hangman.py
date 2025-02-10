@@ -131,7 +131,72 @@ def hangman(secretWord):
 
     Follows the other limitations detailed in the problem write-up.
     '''
-    # FILL IN YOUR CODE HERE...
+    # first thing is first, we need a game loop based on a variable
+    completed = False
+
+    # user gets 8 guesses.
+    guesses = 8
+
+    # list for the input
+    users_input = []
+
+    # now print out the introduction text
+    print("Welcome to the game Hangman!")
+    print("I am thinking of a word that is {0} letters long.".format(len(secretWord)))
+    print("-------------")
+    # entre la loop
+    while not completed:
+      # if there are no guesses left, end the game
+      if guesses < 1:
+          print('Sorry, you ran out of guesses. The word was {0}. '.format(secretWord))
+          break
+
+      # 
+      print("You have {0} guesses left.".format(guesses))
+      print("Available letters: {0}".format(getAvailableLetters(users_input)))
+
+      # take input as a guess
+      guess = input("Please guess a letter: ")
+
+
+      # if user has already guessed the letter, short circuit and continue
+      if guess in users_input:
+        feedback = getGuessedWord(secretWord, users_input)
+        print("Oops! You've already guessed that letter: {0}".format(feedback))
+        print("-------------")
+        continue
+
+      # whilst we never trust user input, let's trust user input.
+      users_input.append(guess)
+
+      # is the word guessed?
+      if isWordGuessed(secretWord, users_input):
+        print('Good guess: {0}'.format(secretWord))
+        print("-------------")
+        print("Congratulations, you won!")
+        break
+          
+
+      # we need this in both cases
+      feedback = getGuessedWord(secretWord, users_input)
+
+      # process the input
+      if guess in secretWord:
+        # it was good, so feedback and decrement guesses.
+        print('Good guess: {0}'.format(feedback))
+      
+      else:
+        # uh-oh, it was a bad guess.
+        print("Oops! That letter is not in my word: {0}".format(feedback))
+        
+        # decrement guesses
+        guesses -= 1
+
+      # now the feedback 
+      print("-------------")
+
+
+
 
 
 
@@ -142,8 +207,8 @@ def hangman(secretWord):
 # and run this file to test! (hint: you might want to pick your own
 # secretWord while you're testing)
 
-# secretWord = chooseWord(wordlist).lower()
-# hangman(secretWord)
+secretWord = chooseWord(wordlist).lower()
+hangman(secretWord)
 
 
 
