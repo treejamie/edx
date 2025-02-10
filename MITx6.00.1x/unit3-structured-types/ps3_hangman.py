@@ -8,6 +8,7 @@
 # (so be sure to read the docstrings!)
 
 import random
+import string
 
 WORDLIST_FILENAME = "MITx6.00.1x/unit3-structured-types/words.txt"
 
@@ -102,7 +103,12 @@ def getAvailableLetters(lettersGuessed):
     returns: string, comprised of letters that represents what letters have not
       yet been guessed.
     '''
-    # FILL IN YOUR CODE HERE...
+    # it is a little code golfy, but this is perfect for list comprehension
+    results = [x for x in string.ascii_lowercase if x not in lettersGuessed]
+
+    # now join it up as a string
+    return "".join(results)
+
     
 
 def hangman(secretWord):

@@ -25,4 +25,4 @@ jobs:
       run: |
         python MITx6.00.1x/unit3-structured-types/_1_odd_tuples.py
         python MITx6.00.1x/unit3-structured-types/_2_how_many.py
-        python MITx6.00.1x/unit3-structured-types/ps3_hangman_word.py
+        python MITx6.00.1x/unit3-structured-types/ps3_hangman_tests.py

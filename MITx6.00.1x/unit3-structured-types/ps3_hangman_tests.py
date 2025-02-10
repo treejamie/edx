@@ -1,11 +1,41 @@
 import sys
-from ps3_hangman import isWordGuessed, getGuessedWord
+from ps3_hangman import isWordGuessed, getGuessedWord, getAvailableLetters
 
 
 
 #
 #
 # boilerplate DIY testing
+test3 = {
+
+    ('e', 'i', 'k', 'p', 'r', 's'): ("apple", 'abcdfghjlmnoqtuvwxyz'),
+    ('e', 'l', 'p', 'p', 'a'): ("apple", 'bcdfghijkmnoqrstuvwxyz'),
+}
+target3 = getAvailableLetters
+
+print("testing: ", target3.__name__, "---------")
+
+for args, bits in test3.items():
+
+    word = bits[0]
+    expected = bits[1]
+
+    result = target3(args)
+
+    try:
+        assert result == expected
+        print("✅: SUCCESS - {1} expected and {0} received".format(
+            result,
+            expected,
+        ))
+    except AssertionError:
+        msg = "🛥️ FAILBOAT:\n\texpected: {1}\n\treceived: {0} ".format(
+            result,
+            expected,
+        )
+        sys.exit(msg)
+
+
 test2 = {
     ('e', 'i', 'k', 'p', 'r', 's'): ("apple", '_ pp_ e'),
     ('e', 'l', 'p', 'p', 'a'): ("apple", 'apple'),
