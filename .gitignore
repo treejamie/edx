@@ -3,3 +3,4 @@
 .DS_Store
 *.pyc
 __pycache__
+MITx6.00.1x/midterm/*.py
