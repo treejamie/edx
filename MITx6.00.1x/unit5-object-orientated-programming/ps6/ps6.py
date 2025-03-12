@@ -50,10 +50,13 @@ def get_story_string():
     """
     Returns: a joke in encrypted text.
     """
-    f = open("story.txt", "r")
+
+    fpath = path.join(getcwd(), "unit5-object-orientated-programming/ps6", "story.txt")
+    f = open(fpath, "r")
     story = str(f.read())
     f.close()
     return story
+
 
 WORDLIST_FILENAME = 'words.txt'
 
@@ -286,6 +289,19 @@ class CiphertextMessage(Message):
         return (probable_shift, result)
 
 
+def decrypt_story():
+    # get story text
+    enc_text = get_story_string()
+
+    # make ciper
+    c = CiphertextMessage(enc_text)
+
+    # decrypt it
+    dec_text = c.decrypt_message()
+    print(dec_text)
+
+
+decrypt_story()
 
 # message test case
 
@@ -301,10 +317,10 @@ class CiphertextMessage(Message):
 # print('Actual Output:', plaintext.get_message_text_encrypted())
     
 #Example test case (CiphertextMessage)
-ciphertext = CiphertextMessage('aoqvwbsfm ucr pfsohvs zwd gohwgtoqhcfm gvoas psr qfcgg ozz pfsoytogh vwrs hcushvsf gvwzzwbu fohs fsqcubwhwcb')
-print('Expected Output:', (12, 'machinery god breathe lip satisfactory shame bed cross all breakfast hide together shilling rate recognition'))
-print('Actual Output:', ciphertext.decrypt_message())
+# ciphertext = CiphertextMessage('aoqvwbsfm ucr pfsohvs zwd gohwgtoqhcfm gvoas psr qfcgg ozz pfsoytogh vwrs hcushvsf gvwzzwbu fohs fsqcubwhwcb')
+# print('Expected Output:', (12, 'machinery god breathe lip satisfactory shame bed cross all breakfast hide together shilling rate recognition'))
+# print('Actual Output:', ciphertext.decrypt_message())
 
-c2 = CiphertextMessage("Bcbgsbgs kcfrg: qcbjsbwsbh ufobr qcbhsbh tfca cttsbr rwghobqs qcibhfm dcgh hvs bchspccy ibqzs cddcgwhs gczjs bskgdodsf fsrrsb ciuvh fstsfsbqs ibrsf kcfr fsghoifobh pszck gcibr pfobqv gdccb dfcdcgoz pckz awzs gdofs vsfs gsfjs oacbu sbuwbs qsbhsf bswhvsf kvoh")
-print('Expected: ', (12,  'Nonsense words: convenient grand content from offend distance country post the notebook uncle opposite solve newspaper redden ought reference under word restaurant below sound branch spoon proposal bowl mile spare here serve among engine center neither what'))
-print('Actual Output:', c2.decrypt_message())
+# c2 = CiphertextMessage("Bcbgsbgs kcfrg: qcbjsbwsbh ufobr qcbhsbh tfca cttsbr rwghobqs qcibhfm dcgh hvs bchspccy ibqzs cddcgwhs gczjs bskgdodsf fsrrsb ciuvh fstsfsbqs ibrsf kcfr fsghoifobh pszck gcibr pfobqv gdccb dfcdcgoz pckz awzs gdofs vsfs gsfjs oacbu sbuwbs qsbhsf bswhvsf kvoh")
+# print('Expected: ', (12,  'Nonsense words: convenient grand content from offend distance country post the notebook uncle opposite solve newspaper redden ought reference under word restaurant below sound branch spoon proposal bowl mile spare here serve among engine center neither what'))
+# print('Actual Output:', c2.decrypt_message())
