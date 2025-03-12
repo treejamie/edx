@@ -251,6 +251,12 @@ class CiphertextMessage(Message):
         Returns: a tuple of the best shift value used to decrypt the message
         and the decrypted message text using that shift value
         '''
+        # access valid words once
+        valid_words = self.get_valid_words()
+
+        # store success
+        success = []
+
         # brute force this. LEEEROOOOOY JJJJEEEEEENNNNKINSS
         # start at 0.
         for i in range(26):
@@ -258,11 +264,26 @@ class CiphertextMessage(Message):
             self.build_shift_dict(i)
             shifted = self.apply_shift(i)
 
-            # if result in words, that's probably our shift
-            if is_word(self.get_valid_words(), shifted):
-                return (i, shifted)
+            # split the words up
+            words = shifted.split(" ")
+
+
+            # iterate over the first 30 words, if most are words
+            # in our list then we have decrypted it, so return it
+            for word in words[:30]:
+
+                # if word in valid words, append shift success
+                if is_word(valid_words, word):
+                    success.append(i)
         
-        return (None, None)
+        # success was highest value in count minus one
+        probable_shift = max(set(success), key=success.count)        
+
+
+        # rebuild shift dict, calc result and return
+        self.build_shift_dict(probable_shift) 
+        result = self.apply_shift(probable_shift)
+        return (probable_shift, result)
 
 
 
@@ -280,6 +301,10 @@ class CiphertextMessage(Message):
 # print('Actual Output:', plaintext.get_message_text_encrypted())
     
 #Example test case (CiphertextMessage)
-ciphertext = CiphertextMessage('jgnnq')
-print('Expected Output:', (24, 'hello'))
+ciphertext = CiphertextMessage('aoqvwbsfm ucr pfsohvs zwd gohwgtoqhcfm gvoas psr qfcgg ozz pfsoytogh vwrs hcushvsf gvwzzwbu fohs fsqcubwhwcb')
+print('Expected Output:', (12, 'machinery god breathe lip satisfactory shame bed cross all breakfast hide together shilling rate recognition'))
 print('Actual Output:', ciphertext.decrypt_message())
+
+c2 = CiphertextMessage("Bcbgsbgs kcfrg: qcbjsbwsbh ufobr qcbhsbh tfca cttsbr rwghobqs qcibhfm dcgh hvs bchspccy ibqzs cddcgwhs gczjs bskgdodsf fsrrsb ciuvh fstsfsbqs ibrsf kcfr fsghoifobh pszck gcibr pfobqv gdccb dfcdcgoz pckz awzs gdofs vsfs gsfjs oacbu sbuwbs qsbhsf bswhvsf kvoh")
+print('Expected: ', (12,  'Nonsense words: convenient grand content from offend distance country post the notebook uncle opposite solve newspaper redden ought reference under word restaurant below sound branch spoon proposal bowl mile spare here serve among engine center neither what'))
+print('Actual Output:', c2.decrypt_message())
