@@ -4,3 +4,4 @@
 *.pyc
 __pycache__
 MITx6.00.1x/midterm/*.py
+MITx6.00.1x/final/*.py
