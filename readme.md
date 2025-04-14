@@ -18,6 +18,7 @@ As an example, many of the [Hacker Rank 90 day challenges](https://github.com/tr
 
 I'd been using and programming in Python since 2007, but I certainly took something away from this course - algorithmic complexity, Big O and the role it plays in a solid computer science foundation. Especially to those of us that are self-taught.
 
+[certifcate of completion](https://courses.edx.org/certificates/bf1a0768018a437b98314bb0a94b5dca)
 
 
 [0]: https://learning.edx.org/course/course-v1:MITx+6.00.1x+1T2025/home
